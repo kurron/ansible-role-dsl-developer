@@ -1,7 +1,10 @@
 ---
-python_download_directory: Downloads
-python_software_directory: Software
+dsl_download_directory: Downloads
+dsl_software_directory: Software
 
-python_pycharm_install: true
-python_pycharm_version: 2016.2.3
+dsl_mps_install: true
+dsl_mps_version: 3.4
+dsl_mps_build: 34
+
+dsl_optional_install: false
 

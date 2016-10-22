@@ -32,7 +32,8 @@ galaxy_info:
 
   galaxy_tags:
       - development
-      - python
+      - dsl
+      - jetbrains
 
 dependencies: []
   # List your role dependencies here, one per line.

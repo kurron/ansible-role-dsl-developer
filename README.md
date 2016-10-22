@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Installation of tools than any self-respecting Python developer loves and needs.
+Installation of tools than any self-respecting developer of domain-specific languages loves and needs.
 
 Requirements
 ------------
@@ -11,8 +11,10 @@ TODO
 Role Variables
 --------------
 
-python_pycharm_install: true
-python_pycharm_version: 2016.2.3
+* dsl_mps_install: true
+* dsl_mps_version: 3.4
+* dsl_mps_build: 34
+* dsl_optional_install: false
 
 Dependencies
 ------------
@@ -25,7 +27,7 @@ Example Playbook
 ```
 - hosts: servers
   roles:
-      - { role: kurron.python-developer, python_pycharm_version: 2016.2.3 }
+      - { role: kurron.dsl-developer, dsl_optional_install: true }
 ```
 
 License

@@ -7,7 +7,7 @@
       mode: 0755
       recurse: yes
   with_items:
-  - "{{ansible_user_dir}}/{{python_software_directory}}"
+  - "{{ansible_user_dir}}/{{dsl_software_directory}}"
 
 - name: Install Required Packages
   become: yes
@@ -17,61 +17,52 @@
   with_items:
   - "curl"
 
-- name: Download Pycharm Tarball
+- name: Download MPS Tarball
   become: no
   get_url:
-      url: "https://download.jetbrains.com/python/pycharm-professional-{{python_pycharm_version}}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{python_download_directory}}/pycharm-{{python_pycharm_version}}.tar.gz"
+      url: "http://download.jetbrains.com/mps/{{dsl_mps_build}}/MPS-{{dsl_mps_version}}.tar.gz"
+      dest: "{{ansible_user_dir}}/{{dsl_download_directory}}/mps-{{dsl_mps_version}}.tar.gz"
       mode: 0444
-  when: python_pycharm_install
+  when: dsl_mps_install
 
-- name: Uncompress Pycharm Tarball
+- name: Uncompress MPS Tarball
   become: no
   unarchive:
-      src: "{{ansible_user_dir}}/{{python_download_directory}}/pycharm-{{python_pycharm_version}}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{python_software_directory}}"
+      src: "{{ansible_user_dir}}/{{dsl_download_directory}}/mps-{{dsl_mps_version}}.tar.gz"
+      dest: "{{ansible_user_dir}}/{{dsl_software_directory}}"
       copy: no
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-      creates: "{{ansible_user_dir}}/{{python_software_directory}}/pycharm-{{python_pycharm_version}}/build.txt"
-  when: python_pycharm_install
+      creates: "{{ansible_user_dir}}/{{dsl_software_directory}}/MPS {{dsl_mps_version}}/build.txt"
+  when: dsl_mps_install
 
-- name: Create Softlink To Pycharm
+- name: Create Softlink To MPS
   become: no
   file:
-      src: "{{ansible_user_dir}}/{{python_software_directory}}/pycharm-{{python_pycharm_version}}"
-      dest: "{{ansible_user_dir}}/{{python_software_directory}}/pycharm"
+      src: "{{ansible_user_dir}}/{{dsl_software_directory}}/MPS {{dsl_mps_version}}"
+      dest: "{{ansible_user_dir}}/{{dsl_software_directory}}/mps"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       state: link
-  when: python_pycharm_install
+  when: dsl_mps_install
 
-- name: Create Desktop Icon For Pycharm
+- name: Create Desktop Icon For MPS
   become: no
   template:
-      src: "templates/pycharm.desktop.j2"
-      dest: "{{ansible_user_dir}}/Desktop/pycharm.desktop"
+      src: "templates/mps.desktop.j2"
+      dest: "{{ansible_user_dir}}/Desktop/mps.desktop"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-  when: python_pycharm_install
+  when: dsl_mps_install
 
-- name: Install Required Packages
+- name: Install Optional Packages
   become: yes
   package:
       name: "{{item}}"
       state: present
   with_items:
-  - "python-pip"
-  - "python-dev"
+  - "antlr"
+  when: dsl_optional_install
 
-- name: Install Python Packages
-  become: yes
-  pip:
-      name: "{{item}}"
-      state: latest
-  with_items:
-  - "pip"
-  - "setuptools"
-  - "virtualenv"
