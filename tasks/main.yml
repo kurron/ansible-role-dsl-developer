@@ -1,22 +1,4 @@
 ---
-- name: Create unprivledged folders
-  become: no
-  file:
-      path: "{{item}}"
-      state: directory
-      mode: 0755
-      recurse: yes
-  with_items:
-  - "{{ansible_user_dir}}/{{dsl_software_directory}}"
-
-- name: Install Required Packages
-  become: yes
-  package:
-      name: "{{item}}"
-      state: present
-  with_items:
-  - "curl"
-
 - name: Download MPS Tarball
   become: no
   get_url:
@@ -29,19 +11,19 @@
   become: no
   unarchive:
       src: "{{ansible_user_dir}}/{{dsl_download_directory}}/mps-{{dsl_mps_version}}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{dsl_software_directory}}"
+      dest: "{{ansible_user_dir}}/{{base_software_directory}}"
       copy: no
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       mode: 0555
-      creates: "{{ansible_user_dir}}/{{dsl_software_directory}}/MPS {{dsl_mps_version}}/build.txt"
+      creates: "{{ansible_user_dir}}/{{base_software_directory}}/MPS {{dsl_mps_version}}/build.txt"
   when: dsl_mps_install
 
 - name: Create Softlink To MPS
   become: no
   file:
-      src: "{{ansible_user_dir}}/{{dsl_software_directory}}/MPS {{dsl_mps_version}}"
-      dest: "{{ansible_user_dir}}/{{dsl_software_directory}}/mps"
+      src: "{{ansible_user_dir}}/{{base_software_directory}}/MPS {{dsl_mps_version}}"
+      dest: "{{ansible_user_dir}}/{{base_software_directory}}/mps"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
       state: link
