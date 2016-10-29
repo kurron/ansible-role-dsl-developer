@@ -36,7 +36,7 @@
       dest: "{{ansible_user_dir}}/Desktop/mps.desktop"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
-      mode: 0555
+      mode: 0755
   when: dsl_mps_install
 
 - name: Install Optional Packages
