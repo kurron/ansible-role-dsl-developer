@@ -3,14 +3,14 @@
   become: no
   get_url:
       url: "http://download.jetbrains.com/mps/{{dsl_mps_build}}/MPS-{{dsl_mps_version}}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{dsl_download_directory}}/mps-{{dsl_mps_version}}.tar.gz"
+      dest: "{{ansible_user_dir}}/{{base_download_directory}}/mps-{{dsl_mps_version}}.tar.gz"
       mode: 0444
   when: dsl_mps_install
 
 - name: Uncompress MPS Tarball
   become: no
   unarchive:
-      src: "{{ansible_user_dir}}/{{dsl_download_directory}}/mps-{{dsl_mps_version}}.tar.gz"
+      src: "{{ansible_user_dir}}/{{base_download_directory}}/mps-{{dsl_mps_version}}.tar.gz"
       dest: "{{ansible_user_dir}}/{{base_software_directory}}"
       copy: no
       owner: "{{ansible_user_uid}}"

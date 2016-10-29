@@ -1,6 +1,4 @@
 ---
-dsl_download_directory: Downloads
-
 dsl_mps_install: true
 dsl_mps_version: 3.4
 dsl_mps_build: 34

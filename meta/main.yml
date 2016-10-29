@@ -34,6 +34,7 @@ galaxy_info:
       - development
       - dsl
       - jetbrains
+      - mps
 
 dependencies:
     - { role: kurron.jdk }
