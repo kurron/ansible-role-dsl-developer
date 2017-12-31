@@ -48,3 +48,13 @@
   - "antlr"
   when: dsl_optional_install
 
+- name: Set Global Environment To Have MPS Use Shared JDK
+  become: yes
+  template:
+      src: "templates/mps-environment.sh.j2"
+      dest: "/etc/profile.d/mps-environment.sh"
+      owner: "{{ansible_user_uid}}"
+      group: "{{ansible_user_gid}}"
+      mode: 0555
+  when: dsl_mps_share_jdk
+

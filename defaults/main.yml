@@ -2,6 +2,7 @@
 dsl_mps_install: true
 dsl_mps_version: 2017.3.2
 dsl_mps_family: 2017.3
+dsl_mps_share_jdk: true
 
 dsl_optional_install: false
 
