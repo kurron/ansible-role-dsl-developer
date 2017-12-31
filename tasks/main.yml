@@ -22,7 +22,7 @@
 - name: Create Softlink To MPS
   become: no
   file:
-      src: "{{ansible_user_dir}}/{{base_software_directory}}/MPS {{dsl_mps_version}}"
+      src: "{{ansible_user_dir}}/{{base_software_directory}}/MPS {{dsl_mps_family}}"
       dest: "{{ansible_user_dir}}/{{base_software_directory}}/mps"
       owner: "{{ansible_user_uid}}"
       group: "{{ansible_user_gid}}"
