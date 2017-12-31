@@ -1,7 +1,7 @@
 ---
 dsl_mps_install: true
-dsl_mps_version: 3.4
-dsl_mps_build: 34
+dsl_mps_version: 2017.3.2
+dsl_mps_build: 173.1609
 
 dsl_optional_install: false
 
